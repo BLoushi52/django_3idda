@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from user.models import Address
 
 
 
@@ -13,7 +14,7 @@ class Category(models.Model):
 
 class Item(models.Model):
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="Itemes"
+        Category, on_delete=models.CASCADE, related_name="itemes"
     )
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=300)
@@ -25,13 +26,6 @@ class Item(models.Model):
     def __str__(self):
         return f"{self.id}: {self.user.username} : {self.title}, {self.category.title}"
         
-class Address(models.Model):
-    dstrict = models.CharField(max_length=100)
-    area = models.CharField(max_length=100)
-    block = models.IntegerField()
-    street = models.CharField(max_length=100)
-    house = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
