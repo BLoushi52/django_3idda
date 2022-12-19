@@ -1,0 +1,22 @@
+{% extends "base.html" %} 
+{% block title %} TITLE {% endblock title %}
+
+ {% block content %}
+ {% load crispy_forms_tags %}
+
+<div class="container text-center">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <form
+        action="{% url 'create-category' %}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %} {{ form | crispy }}
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

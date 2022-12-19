@@ -1,0 +1,123 @@
+{% load crispy_forms_tags %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+    <title>{% block title %} {% endblock title %}</title>
+  </head>
+  <body class="d-flex flex-column min-vh-100 bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <img
+        src="{% static 'assets/img/3idda.png' %}"
+        href="{% url 'home' %}"
+        width="100"
+        height="60"
+      />
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}"> Home </a>
+          </li>
+          {% if request.user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'items-list' %}">All Items</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create-item' %}">Create item</a>
+          </li>
+          {% else %} {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create-category' %}">Create Category</a>
+          </li>
+          {% endif %} {% endif %}
+        </ul>
+
+        <div class="navbar-nav">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown p-2">
+            <a
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              >Profile</a
+            >
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-header"
+                  >Signed in as {{ request.user.username }}</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'profile' %}"
+                  >Edit Profile</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'password_change' %}"
+                  >Change Password</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
+              </li>
+            </ul>
+          </li>
+        </div>
+
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+
+        {% endif %}
+      </div>
+    </nav>
+    {% block content %} {% endblock content%}
+    <footer class="mt-auto">
+      <!-- Copyright -->
+      <div class="text-center p-3 navbar-dark bg-danger">
+        © 2022 Copyright
+        <!-- <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </body>
+</html>

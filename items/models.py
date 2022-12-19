@@ -9,7 +9,7 @@ class Category(models.Model):
     image = models.ImageField(upload_to="media/")
 
     def __str__(self):
-        return f"{self.id}: {self.user.username} : {self.title}"
+        return f"{self.title}"
 
 class Item(models.Model):
     category = models.ForeignKey(
