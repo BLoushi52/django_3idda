@@ -25,14 +25,14 @@ urlpatterns = [
     path("category/create/", create_category, name="create-category"),
     
 
-    path('register/', UserCreateAPIView.as_view(), name='register-api'),
-    path('login/', UserLoginAPIView.as_view(), name='login-api'),
-    path('category/', CategoryView.as_view(), name='category-list-api'),
-    path('item/', ItemView.as_view(), name='item-list-api'),
-    path('item/create/', ItemCreateView.as_view(), name='create-item-api'),
-    path('myitems/', MyItemView.as_view(), name='my_items_list-api'),
-    path('item/delete/<int:item_id>/', ItemDeleteView.as_view(), name='delete-item-api'),
-    path('item/edit/<int:item_id>/', ItemUpdateView.as_view(), name='edit-item-api'),
+    path('api/register/', UserCreateAPIView.as_view(), name='register-api'),
+    path('api/login/', UserLoginAPIView.as_view(), name='login-api'),
+    path('api/category/', CategoryView.as_view(), name='category-list-api'),
+    path('api/item/', ItemView.as_view(), name='item-list-api'),
+    path('api/item/create/', ItemCreateView.as_view(), name='create-item-api'),
+    path('api/myitems/', MyItemView.as_view(), name='my_items_list-api'),
+    path('api/item/delete/<int:item_id>/', ItemDeleteView.as_view(), name='delete-item-api'),
+    path('api/item/edit/<int:item_id>/', ItemUpdateView.as_view(), name='edit-item-api'),
 
 ]
 
