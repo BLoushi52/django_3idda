@@ -16,7 +16,7 @@ class ItemSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     class Meta:
         model = Item
-        fields = ['id', 'title', "user", "category",'image']
+        fields = ['id', 'title', "user", "category",'image', 'price', 'description']
 
 
 class ItemUpdateSerializer(serializers.ModelSerializer):
