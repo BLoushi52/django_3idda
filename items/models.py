@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from user.models import Address
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 
@@ -21,7 +22,7 @@ class Item(models.Model):
     price = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField()
-    rating = models.FloatField(null=True)
+    
 
     def __str__(self):
         return f"{self.id}: {self.user.username} : {self.title}, {self.category.title}"
@@ -39,7 +40,7 @@ class Order(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
 class Review(models.Model):
-    rate = models.FloatField()
+    rate = models.PositiveIntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     review = models.TextField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
