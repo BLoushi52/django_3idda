@@ -1,5 +1,5 @@
 """
-WSGI config for 3idda 3idda.
+WSGI config for django_3idda django_3idda.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', '3idda.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_3idda.settings')
 
 application = get_wsgi_application()

@@ -91,7 +91,7 @@ def create_category(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-        return redirect("home")
+        return redirect("items-list")
 
     context = {"form": form}
     return render(request, "category_create.html", context)
