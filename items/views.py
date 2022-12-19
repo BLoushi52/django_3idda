@@ -1,11 +1,16 @@
 
+from django.http import HttpRequest
+from django.shortcuts import redirect, render
+
 from .models import Category,Item
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from .serializers import  CategorySerializer, ItemSerializer, ItemUpdateSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .permissions import IsCreator
-
+from items import models
+from django.contrib.auth.decorators import login_required
+from items.forms import CategoryForm, ItemForm
 
 
 class CategoryView(ListAPIView):
@@ -46,3 +51,47 @@ class ItemUpdateView(UpdateAPIView):
     lookup_field = 'id'
     lookup_url_kwarg = 'item_id'
     permission_classes = [IsCreator]
+
+
+
+
+### HTML ###
+
+def get_items(request: HttpRequest):
+    items: list[models.Item] = list(models.Item.objects.all())
+    categories: list[models.Category] = list(models.Category.objects.all())
+    context = {
+        "items": items,
+        "categories": categories,
+    }
+    return render(request, "items_list.html", context)
+
+
+@login_required
+def create_item(request):
+    form = ItemForm()
+    if request.method == "POST":
+        form = ItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+        return redirect("items-list")
+
+    context = {"form": form}
+    return render(request, "item_create.html", context)
+
+
+@login_required
+def create_category(request):
+    form = CategoryForm()
+    if request.method == "POST":
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+        return redirect("home")
+
+    context = {"form": form}
+    return render(request, "category_create.html", context)

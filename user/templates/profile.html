@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+{% block title %} TITLE {% endblock title %}
+
+{% block content %}
+ 
+    <h1>Welcome to our event planner!</h1>
+
+    {% if request.user.is_authenticated %}{% if request.user.is_staff %} 
+  
+    {% else %}
+   
+        <h1>You are NOT an organizer!!</h1>
+
+  {% endif %} {% endif %}
+
+{% endblock content %}

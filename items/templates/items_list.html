@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+{% block title %} TITLE {% endblock title %}
+
+ {% block content %}
+ 
+
+ <form class="container  overflow-hidden">
+  <h1 class="text-center">categories</h1>
+
+  <div class="row g-3">
+    {% if categories %} {% for category in categories %} 
+    <div class="col-lg-4">
+      <div class="card shadow my-4">
+        <div class="card-body">
+          <img
+          src={{category.image.url}}
+          class="card-img-top"
+          alt={{category.title}}
+          />
+          <h5 class="card-title text-center">
+  
+              {{category.title}}
+          </h5>
+
+          </div>
+        </div>
+    </div>
+    {% endfor %} {% else %}
+    <p>No category yet!</p>
+    {% endif %}
+  
+  </div>
+  </form>
+
+<form class="container  overflow-hidden">
+<h1 class="text-center">Items</h1>
+<div class="row g-3">
+  {% if items %} {% for item in items %} 
+  <div class="col-lg-4">
+    <div class="card shadow my-4">
+      <div class="card-body">
+        <img
+        src={{item.image.url}}
+        class="card-img-top"
+        alt={{item.title}}
+        />
+        <h5 class="card-title text-center">
+
+            {{item.title}}
+        </h5>
+        <p class="card-text text-center">{{ item.category }}</p>
+          
+        </div>
+      </div>
+  </div>
+  {% endfor %} {% else %}
+  <p>No event items yet!</p>
+  {% endif %}
+
+</div>
+</form>
+
+
+
+
+
+{% endblock content %}

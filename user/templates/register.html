@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block title %} TITLE {% endblock title %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- <h1>Register Page</h1>
+    <div class="container">
+      <form class="my-class" action="{% url 'register' %}" method="POST">
+        {% csrf_token %} {{form|crispy}}
+        <button class="btn btn-dark mt-3" type="submit">Register</button>
+      </form>
+    </div> -->
+
+<h1 class="text-center">Register Page</h1>
+<form
+  class="container overflow-hidden"
+  action="{% url 'register' %}"
+  method="POST"
+>
+  <div class="card text-center">
+    <div class="card-body">
+      <div class="container">
+        {% csrf_token %} {{form|crispy}}
+        <button class="btn btn-dark mt-3" type="submit">Register</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock content %}
