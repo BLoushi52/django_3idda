@@ -1,17 +1,17 @@
 from rest_framework.generics import CreateAPIView
 from .serializers import  UserCreateSerializer, UserLoginSerializer
+from django.http import HttpRequest, HttpResponse
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
-from user.forms import UpdateUserForm, UserLogin, UserRegister
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import render, redirect
+from user.forms import UpdateUserForm, UserLogin, UserRegister
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.contrib import messages
 
 
 ##### API #####
@@ -34,11 +34,6 @@ class UserLoginAPIView(APIView):
 
 
 ##### HTML #####
-
-
-def home(request: HttpRequest):
-    return render(request, "home.html")
-    
 
 def user_register(request):
     form = UserRegister()
@@ -86,7 +81,7 @@ def logout_user(request):
 
 
 
-@login_required
+@staff_member_required(login_url='login')
 def edit_profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -102,6 +97,7 @@ def edit_profile(request):
         "form": user_form,
     }
     return render(request, "edit_profile.html", context)
+
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'change_password.html'
