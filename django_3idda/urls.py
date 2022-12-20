@@ -4,9 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from items.views import CategoryView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyItemView, create_category, create_item, get_items
+from items.views import CategoryView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyItemView, create_category, create_item, get_items, home
 from user.views import ChangePasswordView, UserCreateAPIView, UserLoginAPIView
-from user.views import user_register, logout_user, login_user, edit_profile, home
+from user.views import user_register, logout_user, login_user, edit_profile
 
 
 

@@ -9,8 +9,8 @@ from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .permissions import IsCreator
 from items import models
-from django.contrib.auth.decorators import login_required
 from items.forms import CategoryForm, ItemForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 class CategoryView(ListAPIView):
@@ -57,6 +57,10 @@ class ItemUpdateView(UpdateAPIView):
 
 ### HTML ###
 
+@staff_member_required(login_url='login')
+def home(request: HttpRequest):
+    return render(request, "home.html")
+
 def get_items(request: HttpRequest):
     items: list[models.Item] = list(models.Item.objects.all())
     categories: list[models.Category] = list(models.Category.objects.all())
@@ -67,7 +71,7 @@ def get_items(request: HttpRequest):
     return render(request, "items_list.html", context)
 
 
-@login_required
+@staff_member_required(login_url='login')
 def create_item(request):
     form = ItemForm()
     if request.method == "POST":
@@ -82,7 +86,7 @@ def create_item(request):
     return render(request, "item_create.html", context)
 
 
-@login_required
+@staff_member_required(login_url='login')
 def create_category(request):
     form = CategoryForm()
     if request.method == "POST":
