@@ -3,13 +3,13 @@
 
 {% block content %}
  
-    <h1>Welcome to our event planner!</h1>
+    <h1>Welcome to 3idda !</h1>
 
     {% if request.user.is_authenticated %}{% if request.user.is_staff %} 
   
     {% else %}
    
-        <h1>You are NOT an organizer!!</h1>
+        <h1>You are NOT an Staff member!!</h1>
 
   {% endif %} {% endif %}
 
