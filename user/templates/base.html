@@ -28,6 +28,23 @@
             class="px-4"
             height="60"
           /></a>
+
+
+        <button class="btn btn-outline-dark ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Profile</button>
+
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+          <div class="offcanvas-header">
+            <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Welcome back, {{ request.user.username }}</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+         <ul class="list-group list-group-flush">
+            <button type="button" class="list-group-item list-group-item-action">An item</button>
+            <button type="button" class="list-group-item list-group-item-action">A second item</button>
+            <button type="button" class="list-group-item list-group-item-action">A third item</button>
+            <button type="button" class="list-group-item list-group-item-action">A fourth item</button>
+            <a class="text-decoration-none" href="{% url 'logout' %}"><button type="button" class="list-group-item list-group-item-action text-danger" href="{% url 'logout' %}">Logout</button></a>
+         </ul>
+        </div>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -49,22 +66,6 @@
             </li>
 
           </ul>
-        </div>
-
-        <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Profile</button>
-
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-          <div class="offcanvas-header">
-            <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Welcome back, {{ request.user.username }}</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-         <ul class="list-group list-group-flush">
-            <button type="button" class="list-group-item list-group-item-action">An item</button>
-            <button type="button" class="list-group-item list-group-item-action">A second item</button>
-            <button type="button" class="list-group-item list-group-item-action">A third item</button>
-            <button type="button" class="list-group-item list-group-item-action">A fourth item</button>
-            <a class="text-decoration-none" href="{% url 'logout' %}"><button type="button" class="list-group-item list-group-item-action text-danger" href="{% url 'logout' %}">Logout</button></a>
-         </ul>
         </div>
       </div> 
     </nav>
