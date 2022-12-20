@@ -1,5 +1,5 @@
 from django.db import models
-from .forms import User
+from django.contrib.auth.models import User
 
 
 class Address(models.Model):
@@ -12,3 +12,4 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.user}: {self.dstrict} - {self.area} - {self.block} - {self.street} - {self.house}"
+
