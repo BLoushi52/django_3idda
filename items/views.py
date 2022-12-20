@@ -61,6 +61,7 @@ class ItemUpdateView(UpdateAPIView):
 def home(request: HttpRequest):
     return render(request, "home.html")
 
+@staff_member_required(login_url='login')
 def get_items(request: HttpRequest):
     items: list[models.Item] = list(models.Item.objects.all())
     categories: list[models.Category] = list(models.Category.objects.all())
