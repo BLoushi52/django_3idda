@@ -21,15 +21,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserCreateSerializer(serializers.ModelSerializer):
     username = serializers.CharField(write_only=True)
     password = serializers.CharField(write_only=True)
+    email = serializers.CharField(write_only=True)
+    first_name = serializers.CharField(write_only=True)
+    last_name = serializers.CharField(write_only=True)
     access = serializers.CharField(read_only=True)
     class Meta:
         model = User
-        fields = ["username", "password", "access"]
+        fields = ["username", "password", "access", "email", "first_name", "last_name"]
 
     def create(self, validated_data):
         username = validated_data["username"]
         password = validated_data["password"]
-        new_user = User(username=username)
+        email = validated_data["email"]
+        first_name = validated_data["first_name"]
+        last_name = validated_data["last_name"]
+        new_user = User(username=username, email=email, first_name=first_name, last_name=last_name)
         new_user.set_password(password)
         new_user.save()
         payload = MyTokenObtainPairSerializer.get_token(new_user)
@@ -37,6 +43,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         validated_data["access"] = token
 
         return validated_data
+
 
 
 
