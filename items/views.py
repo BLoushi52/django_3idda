@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 
 from .models import Category,Item
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
-from .serializers import  CategorySerializer, ItemSerializer, ItemUpdateSerializer
+from .serializers import  CategorySerializer, ItemSerializer, ItemUpdateSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .permissions import IsCreator
@@ -52,6 +52,12 @@ class ItemUpdateView(UpdateAPIView):
     lookup_url_kwarg = 'item_id'
     permission_classes = [IsCreator]
 
+class OrderCreateView(CreateAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 
