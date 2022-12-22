@@ -1,9 +1,12 @@
-from rest_framework.generics import CreateAPIView
-from .serializers import  UserCreateSerializer, UserLoginSerializer
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from accounts.models import Address
+from accounts.permissions import IsCreator
+from .serializers import  AddressSerializer, UserCreateSerializer, UserLoginSerializer
 from django.http import HttpRequest, HttpResponse
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import PasswordChangeView
@@ -30,7 +33,28 @@ class UserLoginAPIView(APIView):
             return Response(valid_data, status=HTTP_200_OK)
         return Response(serializer.errors, HTTP_400_BAD_REQUEST)
 
+class MyAddressView(ListAPIView):
+    serializer_class = AddressSerializer
+    permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+            return Address.objects.filter(user=self.request.user)
+            
+
+class AddressCreateView(CreateAPIView):
+    serializer_class = AddressSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class AddressUpdateView(UpdateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'address_id'
+    permission_classes = [IsCreator]
+    
 
 
 ##### HTML #####

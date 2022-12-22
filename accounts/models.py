@@ -14,5 +14,5 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return f"{self.dstrict} - {self.area} - {self.block} - {self.street} - {self.house}"
+        return f"{self.id}: {self.dstrict} - {self.area} - {self.block} - {self.street} - {self.house}"
 

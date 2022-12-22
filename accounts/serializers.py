@@ -3,6 +3,8 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+from accounts.models import Address
+
 User = get_user_model()
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -71,4 +73,9 @@ class UserLoginSerializer(serializers.Serializer):
         return data
 
         
-
+class AddressSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    id = serializers.IntegerField(read_only=True)
+    class Meta:
+        model = Address
+        fields = ['id', "user", "dstrict",'area', 'block', 'street', 'house']
