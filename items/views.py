@@ -2,7 +2,7 @@
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from .models import Category,Item
+from .models import Category,Item, Order
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from .serializers import  CategorySerializer, ItemSerializer, ItemUpdateSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
@@ -58,6 +58,13 @@ class OrderCreateView(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class MyOrderView(ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+            return Order.objects.filter(user=self.request.user)
 
 
 
