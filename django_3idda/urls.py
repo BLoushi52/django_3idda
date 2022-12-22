@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from items.views import CategoryView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyItemView, create_category, create_item, get_items, home
-from accounts.views import ChangePasswordView, UserCreateAPIView, UserLoginAPIView
+from accounts.views import AddressUpdateView, ChangePasswordView, UserCreateAPIView, UserLoginAPIView, MyAddressView, AddressCreateView
 from accounts.views import user_register, logout_user, login_user, edit_profile
 
 
@@ -34,6 +34,9 @@ urlpatterns = [
     path('api/myitems/', MyItemView.as_view(), name='my_items_list-api'),
     path('api/item/delete/<int:item_id>/', ItemDeleteView.as_view(), name='delete-item-api'),
     path('api/item/edit/<int:item_id>/', ItemUpdateView.as_view(), name='edit-item-api'),
+    path('api/addresses/', MyAddressView.as_view(), name='my_addresses_list-api'),
+    path('api/address/create/', AddressCreateView.as_view(), name='create-address-api'),
+    path('api/address/edit/<int:address_id>/', AddressUpdateView.as_view(), name='edit-address-api'),
 
 ]
 
