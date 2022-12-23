@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 from accounts.models import Address
 from accounts.permissions import IsCreator
 from .serializers import  AddressSerializer, UserCreateSerializer, UserLoginSerializer
@@ -55,7 +55,12 @@ class AddressUpdateView(UpdateAPIView):
     lookup_url_kwarg = 'address_id'
     permission_classes = [IsCreator]
     
-
+class AddressDeleteView(DestroyAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'address_id'
+    permission_classes = [IsCreator]
 
 ##### HTML #####
 

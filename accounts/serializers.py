@@ -78,4 +78,4 @@ class AddressSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     class Meta:
         model = Address
-        fields = ['id', "user", "dstrict",'area', 'block', 'street', 'house']
+        fields = ['id', "user", "district",'area', 'block', 'street', 'house']
