@@ -19,8 +19,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Favorite)
 class FavouriteAdmin(admin.ModelAdmin):
-    list_display = ("item", "user")
-    list_filter = ("item","user",)
+    list_display = ("id","user","item")
+    list_filter = ("id","user","item")
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
