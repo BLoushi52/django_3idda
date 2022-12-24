@@ -2,9 +2,9 @@
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from .models import Category,Item, Order
+from .models import Category, Favorite,Item, Order
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
-from .serializers import  CategorySerializer, ItemSerializer, ItemUpdateSerializer, OrderSerializer
+from .serializers import  CategorySerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .permissions import IsCreator
@@ -47,7 +47,7 @@ class ItemDeleteView(DestroyAPIView):
 
 class ItemUpdateView(UpdateAPIView):
     queryset = Item.objects.all()
-    serializer_class = ItemUpdateSerializer
+    serializer_class = ItemSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'item_id'
     permission_classes = [IsCreator]
@@ -66,6 +66,26 @@ class MyOrderView(ListAPIView):
     def get_queryset(self):
             return Order.objects.filter(user=self.request.user)
 
+class MyFavoriteView(ListAPIView):
+    serializer_class = FavoriteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+            return Favorite.objects.filter(user=self.request.user)
+
+class MyFavoriteCreateView(CreateAPIView):
+    serializer_class = FavoriteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class MyFavoriteDeleteView(DestroyAPIView):
+    queryset = Favorite.objects.all()
+    serializer_class = FavoriteSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'favorite_id'
+    permission_classes = [IsCreator]
 
 
 ### HTML ###
