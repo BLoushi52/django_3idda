@@ -1,9 +1,6 @@
-
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-
 from .models import Category, Favorite,Item, Order
-
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from .serializers import  CategorySerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
@@ -12,6 +9,7 @@ from .permissions import IsCreator
 from items import models
 from items.forms import CategoryForm, ItemForm
 from django.contrib.admin.views.decorators import staff_member_required
+from django.http import JsonResponse
 
 
 class CategoryView(ListAPIView):
@@ -95,6 +93,16 @@ class MyFavoriteDeleteView(DestroyAPIView):
     lookup_field = 'id'
     lookup_url_kwarg = 'favorite_id'
     permission_classes = [IsCreator]
+
+class IsFavoritedView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, item_id):
+            is_exists =  Favorite.objects.filter(user=self.request.user, item=item_id).exists()
+            return JsonResponse({'is_exists': is_exists})
+
+
+
 
 
 ### HTML ###
