@@ -1,8 +1,9 @@
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
 from .models import Category, Favorite,Item, Order
+
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from .serializers import  CategorySerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
@@ -19,9 +20,17 @@ class CategoryView(ListAPIView):
     permission_classes = [AllowAny]
 
 class ItemView(ListAPIView):
-    queryset = Item.objects.all()
     serializer_class = ItemSerializer
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        category_id = self.request.query_params.get("category_id", None)
+        if category_id:
+            return Item.objects.filter(category_id=category_id)
+        return Item.objects.all()
+
+
+
     
 class MyItemView(ListAPIView):
     serializer_class = ItemSerializer
