@@ -1,5 +1,5 @@
 from django.http import HttpRequest
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Category, Favorite,Item, Order
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from .serializers import  CategorySerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
@@ -10,7 +10,9 @@ from items import models
 from items.forms import CategoryForm, ItemForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse
-
+from rest_framework.views import APIView
+from rest_framework.views import Response
+from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
 
 class CategoryView(ListAPIView):
     queryset = Category.objects.all()
@@ -87,12 +89,18 @@ class MyFavoriteCreateView(CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-class MyFavoriteDeleteView(DestroyAPIView):
-    queryset = Favorite.objects.all()
-    serializer_class = FavoriteSerializer
-    lookup_field = 'id'
-    lookup_url_kwarg = 'favorite_id'
+class MyFavoriteDeleteView(APIView):
+    lookup_url_kwarg = 'favorite_item_id'
     permission_classes = [IsCreator]
+
+    def delete(self, *args, **kwargs):
+        try:
+            qs = get_object_or_404(Favorite, user=self.request.user, item__id=kwargs.get('favorite_item_id'))
+            qs.delete()
+            return Response(status=HTTP_204_NO_CONTENT)
+        except Favorite.DoesNotExist:
+            return Response(data={'message': 'Not found', 'status':404}, status=HTTP_404_NOT_FOUND)
+        
 
 class IsFavoritedView(ListAPIView):
     permission_classes = [IsAuthenticated]
