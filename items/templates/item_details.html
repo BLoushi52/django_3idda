@@ -2,49 +2,29 @@
 {% block title %} TITLE {% endblock title %}
 
  {% block content %}
- 
+
 <div class="container mt-5 mb-5">
   <div class="row d-flex justify-content-center">
-      <div class="col-md-10">
-          <div class="card">
-              <div class="row">
-                  <div class="col-md-6">
-                      <div class="images p-3">
-                        <div class="cart mt-4 align-items-center"><a href="{% url 'items-list' %}"> <button  class="btn btn-warning text-uppercase mr-2 px-4">Back</button> </a><i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
-                          <div class="text-center p-4"> <img id="main-image" src="{{item.image.url}}" width="250" /> </div>
-
-                  </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="product p-4">
-                        
-                        <div class="mt-4 mb-3"> 
-                          <h3 class="text-uppercase">{{item.title}}</h3>
-                          <span class="text-uppercase text-muted ">Category: {{item.category}}</span>
-                            <div> <span>Price:</span>
-                            <div> <span>{{item.price}} KD</span>
-                                
-                            </div>
-                        </div>
-                        <p class="h6 text-uppercase">description:</p>
-                        <p>{{item.description}}</p>
-                        <div class="sizes mt-5">
-                          <p class="h6 text-uppercase">Created by:</p> 
-                          <p>{{item.user}}</p>
-                        </div>
-
-                    </div>
-                </div>
-          </div>
+    <div class="col-md-10">
+      <div class="ms-4 mb-4">
+        <a class="text-black" href="{% url 'items-list' %}">Home</a> <span class="text-muted">></span> <a class="text-black" href="{% url 'category-detail' category_id=item.category.id %}">{{item.category}}</a> <span class="text-muted">></span> <span class="text-muted">{{item.title}}</span>
       </div>
+      <div class="card">
+        <div class="row">
+            <img class="img-fluid text-center col-lg-6 my-auto " src="{{item.image.url}}"  /> 
+          <div class="col-lg-6 p-4">
+            <p class="m-0 h3 text-uppercase ">{{item.title}}</p>
+            <span class="m-0 text-muted">{{item.category}}</span>
+            <p class="m-0 mt-4">{{item.price}} KD</p>
+            <p class="m-0 mt-4 text-uppercase">description:</p>
+            <p class="m-0">{{item.description}}</p>
+            <p class="m-0 mt-4 text-uppercase">Created by:</p> 
+            <p class="m-0 badge bg-black rounded-pill">{{item.user}}</p>   
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-</div>
-
-
-
-
-
-
 
 {% endblock content %}

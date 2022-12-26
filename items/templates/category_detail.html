@@ -1,0 +1,34 @@
+{% extends "base.html" %} 
+{% block title %}{{category.title}} | 3idda{% endblock title %}
+
+ {% block content %}
+
+ <form class="container  overflow-hidden">
+    <h1  class="text-center">{{category.title}}</h1>
+    <div class="row g-3">
+      {% if items %} {% for item in items %} 
+      <div class="col-lg-2 col-md-4 col-sm-6" >
+        <div class="card shadow my-1">
+          <div  class="card-body position-relative">
+            <a href="{% url 'item_details' item_id=item.id %}"><img
+            src={{item.image.url}}
+            class="card-img-top"
+            alt={{item.title}}
+            /></a>
+            <h4 class="card-title text-center">
+    
+                {{item.title}}
+            </h4>
+            <p class="mx-3 position-absolute bottom-0 end-0   h6 text-white badge bg-secondary rounded-pill">{{ item.category }}</p>
+              
+            </div>
+          </div>
+      </div>
+      {% endfor %} {% else %}
+      <p>No items yet!</p>
+      {% endif %}
+    
+    </div>
+    </form>
+
+{% endblock content %}

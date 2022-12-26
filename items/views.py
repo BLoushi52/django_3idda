@@ -151,7 +151,18 @@ def get_categories(request: HttpRequest):
     context = {
         "categories": categories,
     }
-    return render(request, "categories_list.html", context) # categories_list make
+    return render(request, "categories_list.html", context)
+
+
+@staff_member_required(login_url='login')
+def get_category(request, category_id):
+    category = models.Category.objects.get(id=category_id)
+    context = {
+        "category" :category,
+        "items" : category.items.all()
+    }
+    return render(request, "category_detail.html", context)
+    
 
 
 @staff_member_required(login_url='login')
