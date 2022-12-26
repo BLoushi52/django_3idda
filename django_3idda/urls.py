@@ -42,7 +42,7 @@ urlpatterns = [
     path('api/myorders/', MyOrderView.as_view(), name='my_orders_list-api'),
     path('api/myfavorite/', MyFavoriteView.as_view(), name='my_favorite_list-api'),
     path('api/myfavorite/create/', MyFavoriteCreateView.as_view(), name='create-myfavorite-api'),
-    path('api/myfavorite/delete/<int:favorite_id>/', MyFavoriteDeleteView.as_view(), name='delete-myfavorite-api'),
+    path('api/myfavorite/delete/<int:favorite_item_id>/', MyFavoriteDeleteView.as_view(), name='delete-myfavorite-api'),
     path('api/myfavorite/check/<int:item_id>/', IsFavoritedView.as_view(), name='check-favorite-api'),
 ]
 
