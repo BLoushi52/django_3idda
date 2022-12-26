@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from accounts.models import Address
@@ -12,12 +11,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom claims
         token['username'] = user.username
         token['first_name'] = user.first_name
-       
-        # ...
-
+    
         return token
 
 
