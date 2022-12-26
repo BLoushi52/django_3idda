@@ -8,10 +8,6 @@ from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDelet
 from accounts.views import AddressDeleteView, AddressUpdateView, ChangePasswordView, UserCreateAPIView, UserLoginAPIView, MyAddressView, AddressCreateView
 from accounts.views import user_register, logout_user, login_user, edit_profile
 
-
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home, name="home"),
@@ -19,7 +15,6 @@ urlpatterns = [
     path("profile/", edit_profile, name="profile"),
     path("logout/", logout_user, name="logout"),
     path("login/", login_user, name="login"),
-    path("profile/", edit_profile, name="profile"),
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
     path("items/", get_items, name="items-list"),
     path("item/create/", create_item, name="create-item"),
@@ -44,9 +39,6 @@ urlpatterns = [
     path('api/myfavorite/create/', MyFavoriteCreateView.as_view(), name='create-myfavorite-api'),
     path('api/myfavorite/delete/<int:favorite_id>/', MyFavoriteDeleteView.as_view(), name='delete-myfavorite-api'),
     path('api/myfavorite/check/<int:item_id>/', IsFavoritedView.as_view(), name='check-favorite-api'),
-
-
-
 ]
 
 

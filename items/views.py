@@ -1,10 +1,10 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from .models import Category, Favorite,Item, Order
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from .serializers import  CategorySerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .permissions import IsCreator
 from items import models
 from items.forms import CategoryForm, ItemForm
@@ -128,9 +128,9 @@ def create_item(request):
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
         return redirect("items-list")
 
     context = {"form": form}
@@ -143,9 +143,9 @@ def create_category(request):
     if request.method == "POST":
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
+            category = form.save(commit=False)
+            category.user = request.user
+            category.save()
         return redirect("items-list")
 
     context = {"form": form}
