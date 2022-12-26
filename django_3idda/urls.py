@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, get_items, home, get_item_details
+from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, get_categories, get_items, home, get_item_details
 
 from accounts.views import AddressDeleteView, AddressUpdateView, ChangePasswordView, UserCreateAPIView, UserLoginAPIView, MyAddressView, AddressCreateView
 from accounts.views import user_register, logout_user, login_user, edit_profile
