@@ -74,11 +74,11 @@ class MyOrderView(ListAPIView):
             return Order.objects.filter(user=self.request.user)
 
 class MyFavoriteView(ListAPIView):
-    serializer_class = FavoriteSerializer
+    serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-            return Favorite.objects.filter(user=self.request.user)
+            return [fav.item for fav in Favorite.objects.filter(user = self.request.user)]
 
 class MyFavoriteCreateView(CreateAPIView):
     serializer_class = FavoriteSerializer

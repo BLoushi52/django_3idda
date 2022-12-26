@@ -49,7 +49,7 @@ class Review(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
 class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     class Meta:
         unique_together = ('user', 'item',)
