@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+{% block title %} TITLE {% endblock title %}
+
+ {% block content %}
+ 
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+      <div class="col-md-10">
+          <div class="card">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="images p-3">
+                        <div class="cart mt-4 align-items-center"><a href="{% url 'items-list' %}"> <button  class="btn btn-warning text-uppercase mr-2 px-4">Back</button> </a><i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                          <div class="text-center p-4"> <img id="main-image" src="{{item.image.url}}" width="250" /> </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product p-4">
+                        
+                        <div class="mt-4 mb-3"> 
+                          <h3 class="text-uppercase">{{item.title}}</h3>
+                          <span class="text-uppercase text-muted ">Category: {{item.category}}</span>
+                            <div> <span>Price:</span>
+                            <div> <span>{{item.price}} KD</span>
+                                
+                            </div>
+                        </div>
+                        <p class="h6 text-uppercase">description:</p>
+                        <p>{{item.description}}</p>
+                        <div class="sizes mt-5">
+                          <p class="h6 text-uppercase">Created by:</p> 
+                          <p>{{item.user}}</p>
+                        </div>
+
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+{% endblock content %}
