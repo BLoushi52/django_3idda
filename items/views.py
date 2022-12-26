@@ -97,12 +97,36 @@ def home(request: HttpRequest):
 @staff_member_required(login_url='login')
 def get_items(request: HttpRequest):
     items: list[models.Item] = list(models.Item.objects.all())
-    categories: list[models.Category] = list(models.Category.objects.all())
     context = {
         "items": items,
-        "categories": categories,
+        
     }
     return render(request, "items_list.html", context)
+
+@staff_member_required(login_url='login')
+def get_item_details(request, item_id):
+    item= models.Item.objects.get(id=item_id)
+   
+    context = {
+        "item": {
+            "id":item.id,
+            "title": item.title,
+            "description": item.description,
+            "price": item.price,
+            "user": item.user,
+            "image": item.image,
+            "category": item.category,
+        }
+    }
+    return render(request, "item_details.html", context)
+
+@staff_member_required(login_url='login')
+def get_categories(request: HttpRequest):
+    categories: list[models.Category] = list(models.Category.objects.all())
+    context = {
+        "categories": categories,
+    }
+    return render(request, "categories_list.html", context) # categories_list make
 
 
 @staff_member_required(login_url='login')
