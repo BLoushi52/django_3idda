@@ -5,7 +5,7 @@ from .models import Category, Item, Order, Review, Favorite
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("title", "user")
+    list_display = ('id',"title", "user")
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):

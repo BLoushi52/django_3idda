@@ -4,13 +4,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from items.views import CategoryView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, get_items, home, get_categories, get_item_details
+
+from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, get_items, home, get_item_details
+
 from accounts.views import AddressDeleteView, AddressUpdateView, ChangePasswordView, UserCreateAPIView, UserLoginAPIView, MyAddressView, AddressCreateView
 from accounts.views import user_register, logout_user, login_user, edit_profile
-
-
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,7 +17,6 @@ urlpatterns = [
     path("profile/", edit_profile, name="profile"),
     path("logout/", logout_user, name="logout"),
     path("login/", login_user, name="login"),
-    path("profile/", edit_profile, name="profile"),
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
     path("items/", get_items, name="items-list"),
     path("category/", get_categories, name="categories-list"),
@@ -46,7 +43,7 @@ urlpatterns = [
     path('api/myfavorite/', MyFavoriteView.as_view(), name='my_favorite_list-api'),
     path('api/myfavorite/create/', MyFavoriteCreateView.as_view(), name='create-myfavorite-api'),
     path('api/myfavorite/delete/<int:favorite_id>/', MyFavoriteDeleteView.as_view(), name='delete-myfavorite-api'),
-
+    path('api/myfavorite/check/<int:item_id>/', IsFavoritedView.as_view(), name='check-favorite-api'),
 ]
 
 
