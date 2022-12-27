@@ -18,10 +18,9 @@
       <a class="text-decoration-none text-black" href="{% url 'item_details' item_id=item.id %}">
         <div class="col">
           <div class="card h-100">
-            <img src="{{item.image.url}}" class="card-img-top" alt="{{item.title}}">
+           <div class="ratio ratio-4x3"> <img src="{{item.image.url}}" class="card-img-top" alt="{{item.title}}" style="object-fit: cover;"></div>
             <div class="card-body">
               <h5 class="card-title text-center">{{item.title}}</h5>
-              <p class="card-text text-muted">{{item.description}}</p>
             </div>
             <div class="card-footer">
               <small class="text-muted">Category: {{item.category}}</small>
