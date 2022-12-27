@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% block title %} TITLE {% endblock title %}
+{% block title %}{{item.title}} | 3idda{% endblock title %}
 
  {% block content %}
 
@@ -7,7 +7,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-10">
       <div class="ms-4 mb-4">
-        <a class="text-black" href="{% url 'items-list' %}">Home</a> <span class="text-muted">></span> <a class="text-black" href="{% url 'category-detail' category_id=item.category.id %}">{{item.category}}</a> <span class="text-muted">></span> <span class="text-muted">{{item.title}}</span>
+        <a class="text-black" href="{% url 'home' %}">Home</a> <span class="text-muted">></span> <a class="text-black" href="{% url 'categories-list' %}">Categories</a> <span class="text-muted">></span> <a class="text-black" href="{% url 'category-detail' category_id=item.category.id %}">{{item.category}}</a> <span class="text-muted">></span> <span class="text-muted">{{item.title}}</span>
       </div>
       <div class="card">
         <div class="row">
