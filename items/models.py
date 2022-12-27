@@ -41,6 +41,8 @@ class Order(models.Model):
     status = models.CharField(max_length=100)
     order_duration = models.PositiveIntegerField()
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
+    start_date = models.DateField()
+    end_date = models.DateField()
 
 class Review(models.Model):
     rate = models.PositiveIntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])

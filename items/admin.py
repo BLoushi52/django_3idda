@@ -14,7 +14,7 @@ class ItemAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("user", "item", "order_duration", "address", "price", "status")
+    list_display = ("user", "item", "order_duration", "address", "price", "status", "start_date","end_date")
     list_filter = ("user","item", "status", )
 
 @admin.register(Favorite)
