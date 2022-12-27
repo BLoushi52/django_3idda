@@ -1,34 +1,34 @@
 {% extends "base.html" %} 
-{% block title %} TITLE {% endblock title %}
+{% block title %} All Items | 3idda {% endblock title %}
 
- {% block content %}
- 
-
+{% block content %}
 <form class="container  overflow-hidden">
-<h1  class="text-center">Items</h1>
-<div class="row g-3">
-  {% if items %} {% for item in items %} 
-  <div class="col-lg-2 col-md-4 col-sm-6" >
-    <div class="card shadow my-1">
-      <div  class="card-body position-relative">
-        <a href="{% url 'item_details' item_id=item.id %}"><img
-        src={{item.image.url}}
-        class="card-img-top"
-        alt={{item.title}}
-        /></a>
-        <h4 class="card-title text-center">
+<h1  class="text-center">All Items</h1>
+<div class="">
+  {% if items %} 
+  <div class="row row-cols-1 row-cols-md-5 g-4 pb-5">
+  {% for item in items %} 
 
-            {{item.title}}
-        </h4>
-        <p class="mx-3 position-absolute bottom-0 end-0   h6 text-white badge bg-secondary rounded-pill">{{ item.category }}</p>
-          
+  <a class="text-decoration-none text-black" href="{% url 'item_details' item_id=item.id %}">
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{item.image.url}}" class="card-img-top" alt="{{item.title}}">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{item.title}}</h5>
+          <p class="card-text text-muted">{{item.description}}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Category: {{item.category}}</small>
+          <br>
+          <small class="text-muted">Created by: {{item.user}}</small>
         </div>
       </div>
-  </div>
+    </div>
+  </a>
   {% endfor %} {% else %}
-  <p>No event items yet!</p>
+  <h1>Sorry, no items yet!</h1>
   {% endif %}
-
+</div>
 </div>
 </form>
 

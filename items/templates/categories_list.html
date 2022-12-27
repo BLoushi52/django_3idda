@@ -1,36 +1,36 @@
 {% extends "base.html" %} 
-{% block title %} TITLE {% endblock title %}
+{% block title %}Categories | 3idda{% endblock title %}
 
  {% block content %}
  
 
- <form class="container  overflow-hidden">
-  <h1 class="text-center">Categories</h1>
-
-  <div class="row g-3">
-    {% if categories %} {% for category in categories %} 
-    <div class="col-lg-2 col-md-4 col-sm-6">
-      <div class="card shadow my-1">
-        <a href="{% url 'category-detail' category_id=category.id %}">
-          <div class="card-body">
-            <img
-            src={{category.image.url}}
-            class="card-img-top"
-            alt={{category.title}}
-            />
-            <h6 class="card-title text-center">
-                {{category.title}}
-            </h6>
-          </div>
-        </a>
-      </div>
-      
-    </div>
-    {% endfor %} {% else %}
-    <p>No category yet!</p>
-    {% endif %}
-  
+ <div class="container">
+  <h1 class="text-center pt-2">Categories</h1>
+  <div class="ms-4 mb-4">
+    <a class="text-black" href="{% url 'home' %}">Home</a> <span class="text-muted">></span> <span class="text-muted">Categories</span>
   </div>
-  </form>
+  {% if categories %} 
+  <div class="row row-cols-1 row-cols-md-5 g-4 pb-5">
+  {% for category in categories %} 
 
+
+    <a class="text-decoration-none text-black" href="{% url 'category-detail' category_id=category.id %} ">
+      <div class="col">
+        <div class="card h-100">
+          <img src="{{category.image.url}}" class="card-img-top p-2" alt="{{category.title}}">
+          <div class="card-body">
+            <h6 class="card-title text-center">{{category.title}}</h6>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Created by: {{category.user}}</small>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %} {% else %}
+    <h1>Sorry, no categories yet!</h1>
+    {% endif %}
+  </div>
+  </div>
+  </div>
 {% endblock content %}

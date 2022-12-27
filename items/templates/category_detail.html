@@ -5,30 +5,42 @@
 
  <form class="container  overflow-hidden">
     <h1  class="text-center">{{category.title}}</h1>
-    <div class="row g-3">
-      {% if items %} {% for item in items %} 
-      <div class="col-lg-2 col-md-4 col-sm-6" >
-        <div class="card shadow my-1">
-          <div  class="card-body position-relative">
-            <a href="{% url 'item_details' item_id=item.id %}"><img
-            src={{item.image.url}}
-            class="card-img-top"
-            alt={{item.title}}
-            /></a>
-            <h4 class="card-title text-center">
-    
-                {{item.title}}
-            </h4>
-            <p class="mx-3 position-absolute bottom-0 end-0   h6 text-white badge bg-secondary rounded-pill">{{ item.category }}</p>
-              
+    <div class="ms-4 mb-4">
+        <a class="text-black" href="{% url 'home' %}">Home</a> <span class="text-muted">></span> <a class="text-black" href="{% url 'categories-list' %}">Categories</a> <span class="text-muted">></span> <span class="text-muted">{{category.title}}</span>
+    </div>
+    {% if items %} 
+    <div class="row row-cols-1 row-cols-md-5 g-4 pb-5">
+      {% for item in items %} 
+
+
+
+
+      <a class="text-decoration-none text-black" href="{% url 'item_details' item_id=item.id %}">
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{item.image.url}}" class="card-img-top" alt="{{item.title}}">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{item.title}}</h5>
+              <p class="card-text text-muted">{{item.description}}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Category: {{item.category}}</small>
+              <br>
+              <small class="text-muted">Created by: {{item.user}}</small>
             </div>
           </div>
-      </div>
+        </div>
+      </a>
+  
+
+
+
+
       {% endfor %} {% else %}
-      <p>No items yet!</p>
+      <h3>Sorry, no items yet!</h3>
       {% endif %}
-    
     </div>
+      
     </form>
 
 {% endblock content %}
