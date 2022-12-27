@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, get_categories, get_category, get_items, home, get_item_details
+from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, get_categories, get_items, home, get_item_details
 
 from accounts.views import AddressDeleteView, AddressUpdateView, ChangePasswordView, UserCreateAPIView, UserLoginAPIView, MyAddressView, AddressCreateView
 from accounts.views import user_register, logout_user, login_user, edit_profile
@@ -20,7 +20,6 @@ urlpatterns = [
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
     path("items/", get_items, name="items-list"),
     path("category/", get_categories, name="categories-list"),
-    path("category/<int:category_id>/", get_category, name="category-detail"),
     path('items/details/<int:item_id>/', get_item_details, name="item_details"),
     
     path("item/create/", create_item, name="create-item"),
