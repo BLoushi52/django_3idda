@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Category, Favorite,Item, Order
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
-from .serializers import  CategorySerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
+from .serializers import  CategorySerializer, CreateItemSerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .permissions import IsCreator
@@ -41,7 +41,7 @@ class MyItemView(ListAPIView):
             
 
 class ItemCreateView(CreateAPIView):
-    serializer_class = ItemSerializer
+    serializer_class = CreateItemSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):

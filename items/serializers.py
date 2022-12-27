@@ -19,7 +19,7 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = ['id', 'title', "user", "category",'image', 'price', 'description']
 
-class CreteItemSerializer(serializers.ModelSerializer):
+class CreateItemSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     id = serializers.IntegerField(read_only=True)
     
