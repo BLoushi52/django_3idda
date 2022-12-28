@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+{% block title %} All Items | 3idda {% endblock title %}
+
+{% block content %}
+<form class="container  overflow-hidden">
+<h1  class="text-center">All Orders</h1>
+<div class="">
+  {% if orders %} 
+  <div class="row row-cols-1 row-cols-md-5 g-4 pb-5">
+  {% for order in orders %} 
+  
+<div>
+
+  <a class="text-decoration-none text-black" href="{% url 'orders-list'%}">
+    <div class="col">
+      <div class="card h-100">
+        <div class="ratio ratio-4x3"> <img src="{{order.item.image.url}}" class="card-img-top" alt="{{order.item.title}}" style="object-fit: cover;"></div>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{order.item.title}}</h5>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Category: {{order.item.category}}</small>
+          <br>
+          <small class="text-muted">Rent by: {{order.user}}</small>
+          <br>
+          <small class="text-muted">Supplier: {{order.item.user}}</small>
+          <br>
+          <small class="text-muted">From: {{order.start_date}}</small>
+          <br>
+          <small class="text-muted">To: {{order.end_date}} </small>
+          <br>
+          <small class="text-muted">Price: KWD {{order.price}}</small>
+        </div>
+      </div>
+    </div>
+  </a>
+
+
+</div>
+
+  {% endfor %} {% else %}
+  <h1>Sorry, no items yet!</h1>
+  {% endif %}
+</div>
+</div>
+</form>
+
+
+
+
+
+{% endblock content %}

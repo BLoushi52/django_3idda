@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, delete_item, get_categories, get_category, get_items, home, get_item_details
+from items.views import CategoryView, IsFavoritedView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemView, MyFavoriteCreateView, MyFavoriteDeleteView, MyFavoriteView, MyItemView, MyOrderView, OrderCreateView, create_category, create_item, delete_item, get_categories, get_category, get_items, get_orders, home, get_item_details
 
 from accounts.views import AddressDeleteView, AddressUpdateView, ChangePasswordView, UserCreateAPIView, UserLoginAPIView, MyAddressView, AddressCreateView
 from accounts.views import user_register, logout_user, login_user, edit_profile
@@ -25,6 +25,8 @@ urlpatterns = [
     path("item/create/", create_item, name="create-item"),
     path("item/delete/<int:item_id>/", delete_item, name="delete-item"),
     path("category/create/", create_category, name="create-category"),
+    path("orders/", get_orders, name="orders-list"),
+    
 
     
 
