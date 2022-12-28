@@ -56,7 +56,7 @@ class ItemDeleteView(DestroyAPIView):
 
 class ItemUpdateView(UpdateAPIView):
     queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+    serializer_class = CreateItemSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'item_id'
     permission_classes = [IsCreator]
