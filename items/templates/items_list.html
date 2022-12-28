@@ -8,6 +8,8 @@
   {% if items %} 
   <div class="row row-cols-1 row-cols-md-5 g-4 pb-5">
   {% for item in items %} 
+  
+<div>
 
   <a class="text-decoration-none text-black" href="{% url 'item_details' item_id=item.id %}">
     <div class="col">
@@ -21,9 +23,14 @@
           <br>
           <small class="text-muted">Created by: {{item.user}}</small>
         </div>
+        <a class="btn btn-primary btn-sm" href="{% url 'delete-item' item_id=item.id %}">Delete</a>
       </div>
     </div>
   </a>
+
+
+</div>
+
   {% endfor %} {% else %}
   <h1>Sorry, no items yet!</h1>
   {% endif %}

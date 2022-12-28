@@ -10,7 +10,7 @@ class CategoryForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ["category", "title", "image","description","price","image"]
+        fields = ["user", "category", "title", "image","description","price","image"]
 
 
 
