@@ -199,3 +199,12 @@ def create_category(request):
     context = {"form": form}
     return render(request, "category_create.html", context)
 
+
+@staff_member_required(login_url='login')
+def get_orders(request: HttpRequest):
+    orders: list[models.Order] = list(models.Order.objects.all())
+    context = {
+        "orders": orders,
+        
+    }
+    return render(request, "orders_list.html", context)
