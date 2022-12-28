@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Category, Favorite,Item, Order
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
-from .serializers import  CategorySerializer, CreateItemSerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
+from .serializers import  CategorySerializer, CreateItemSerializer, CreateOrderSerializer, FavoriteSerializer, ItemSerializer, OrderSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .permissions import IsCreator
@@ -13,6 +13,9 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.views import Response
 from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
+from django.contrib.auth import get_user_model
+
+
 
 class CategoryView(ListAPIView):
     queryset = Category.objects.all()
@@ -62,7 +65,7 @@ class ItemUpdateView(UpdateAPIView):
     permission_classes = [IsCreator]
 
 class OrderCreateView(CreateAPIView):
-    serializer_class = OrderSerializer
+    serializer_class = CreateOrderSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -172,13 +175,15 @@ def create_item(request):
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             item = form.save(commit=False)
-            item.user = request.user
             item.save()
         return redirect("items-list")
 
     context = {"form": form}
     return render(request, "item_create.html", context)
 
+def delete_item(request, item_id):
+    Item.objects.get(id=item_id).delete()
+    return redirect("items-list")
 
 @staff_member_required(login_url='login')
 def create_category(request):
@@ -193,3 +198,4 @@ def create_category(request):
 
     context = {"form": form}
     return render(request, "category_create.html", context)
+

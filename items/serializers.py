@@ -35,7 +35,14 @@ class OrderSerializer(serializers.ModelSerializer):
     item = ItemSerializer()
     class Meta:
         model = Order
-        fields = ['id', "user", "item", 'order_duration', 'address','price', 'status', "start_date,",  "end_date"]
+        fields = ['id', "user", "item", 'order_duration', 'address','price', 'status', "start_date",  "end_date"]
+
+class CreateOrderSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    id = serializers.IntegerField(read_only=True)
+    class Meta:
+        model = Order
+        fields = ['id', "user", "item", 'order_duration', 'address','price', 'status', "start_date",  "end_date"]
 
 class FavoriteSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
