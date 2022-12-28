@@ -4,7 +4,40 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<h1 class="text-center pt-5">Welcome to 3idda!</h1>
-
+<h1 class="text-center pt-3">Dashboard</h1>
+{% if orders %} 
+<div class="container">
+<table class="table table-hover ">
+    <thead class="bg-warning">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">User</th>
+        <th scope="col">Item</th>
+        <th scope="col">Order Duration</th>
+        <th scope="col">Address</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Status</th>
+    </tr>
+    </thead>
+    {% for order in orders %} 
+    <tbody>
+      <tr>
+        <th scope="row">{{order.id}}</th>
+        <td>{{order.user.first_name}} {{order.user.last_name}}</td>
+        <td>{{order.item}}</td>
+        <td>{{order.order_duration}} {% if order.order_duration > 1 %}Days{% else %}Day{% endif %}</td>
+        <td>{{order.address}}</td>
+        <td>{{order.start_date}}</td>
+        <td>{{order.end_date}}</td>
+        <td>{{order.status}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+</table>
+</div>
+    {% else %}
+    <h3 class="text-center mt-5 text-muted">Sorry, no orders yet!</h3>
+{% endif %}
 
 {% endblock content %}

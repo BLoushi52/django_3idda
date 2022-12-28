@@ -120,7 +120,11 @@ class IsFavoritedView(ListAPIView):
 
 @staff_member_required(login_url='login')
 def home(request: HttpRequest):
-    return render(request, "home.html")
+    orders: list[models.Order] = list(models.Order.objects.all())
+    context = {
+        "orders": orders,
+    }
+    return render(request, "home.html", context)
 
 @staff_member_required(login_url='login')
 def get_items(request: HttpRequest):
